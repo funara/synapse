@@ -18,10 +18,10 @@ Decide per-question, not per-session. The test: **would the user understand this
 ## Starting a Session
 
 Start the visual server in the background using your execution tools.
-Because this is an extension, you must run it from the extension mount path:
+Because this is an extension, you must determine the absolute path to `serve.js` (which is located in the `scripts` directory next to this file) and run it:
 
 ```bash
-node .gemini/extensions/synapse/skills/spec/scripts/serve.js
+node <absolute_path_to_serve.js>
 ```
 
 Save `screen_dir` and `state_dir` from the stdout JSON response. Tell user to open the URL.
@@ -60,11 +60,9 @@ Save `screen_dir` and `state_dir` from the stdout JSON response. Tell user to op
 
 When the spec is finalized and the user approves the build, you MUST kill the visual companion server process. Do not leave it running in the background.
 
-## Writing Content Fragments
+## Writing Content
 
-Write just the content that goes inside the page. 
-
-**CRITICAL RULE:** Do NOT wrap your content in `<!DOCTYPE html>`, `<html>`, `<head>`, or `<body>` tags! Do NOT write your own `<style>`. The server automatically injects your content into a pre-styled Synapse theme frame. If you output a full HTML document, it will break the rendering pipeline!
+**FORMATTING PREFERENCE:** Prefer writing content fragments (no `<html>`, `<head>`, or `<body>` tags) to automatically inherit the built-in Synapse theme framework. If you need specific external CSS or libraries that aren't provided by the theme, you may write a full HTML page. The server will intelligently extract your `<link>` and `<style>` tags and inject them into the frame template, ensuring your design renders properly while preserving the Visual Companion's structural header and footer.
 
 **Options (A/B/C choices)**
 ```html
@@ -109,10 +107,52 @@ Write just the content that goes inside the page.
 ```
 
 ### Typography
-- \`h2\` — page title
-- \`h3\` — section heading
-- \`.subtitle\` — secondary text below title
-- \`.section\` — content block with bottom margin
+- `h2` — page title
+- `h3` — section heading
+- `.subtitle` — secondary text below title
+- `.section` — content block with bottom margin
+- `.text-sm`, `.text-muted`, `.font-bold`
+
+### Component Reference (Built-in Design System)
+You don't need Bootstrap. The Synapse theme includes native utilities:
+
+**Layout & Flex:**
+- `.flex` (center-aligned), `.flex-between`, `.gap-sm`, `.gap-md`
+
+**Data Tables:**
+```html
+<table class="data-table">
+  <thead><tr><th>Name</th><th>Status</th></tr></thead>
+  <tbody><tr><td>...</td><td>...</td></tr></tbody>
+</table>
+```
+
+**Badges & Status Dots:**
+- `.badge`, `.badge-success`, `.badge-warning`, `.badge-info`, `.badge-neutral`
+- `.dot`, `.dot-green`, `.dot-amber`, `.dot-red`
+
+**Buttons:**
+- `.btn`, `.btn-primary`, `.btn-secondary`, `.btn-ghost`
+- `.btn-sm`, `.btn-pill`
+
+**Form Elements:**
+- `<input class="input" type="text">`
+- `<select class="select">`
+
+**Callouts (Info boxes):**
+```html
+<div class="callout callout-info">
+  <h4>Note</h4>
+  <p>Description text</p>
+</div>
+```
+
+**Steps / Timeline:**
+```html
+<ul class="steps">
+  <li><div class="step-title">Phase 1</div><div class="step-desc">Detail</div></li>
+</ul>
+```
 
 **Keep mockups simple** — focus on layout and structure, not pixel-perfect design.
 
