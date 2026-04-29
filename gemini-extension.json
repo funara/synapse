@@ -1,0 +1,6 @@
+{
+  "name": "synapse",
+  "description": "Core skills library: autonomous spec, build, test, review pipeline",
+  "version": "1.0.0",
+  "contextFileName": "GEMINI.md"
+}
