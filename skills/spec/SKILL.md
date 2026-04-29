@@ -22,10 +22,10 @@ If they agree, read `skills/spec/visual-companion.md` and start the server.
 The ONLY time you are allowed to invoke the `build` skill is after you have generated the final text spec and received explicit, unequivocal approval from the human in the terminal.
 
 1. **A selection in the Visual Companion is NOT an approval to build.** It is only a design choice.
-2. After the design is finalized, you must present the text spec, steps, and acceptance criteria.
+2. Allow the user to iterate in the Visual Companion as long as they need. Do NOT ask for spec approval until they explicitly say they are satisfied with the design. Once the design is finalized, present the text spec, steps, and acceptance criteria.
 3. Then, you must ask EXACTLY ONCE: **"Spec complete. Approve and build?"**
 4. You MUST STOP AND WAIT. Do NOT auto-invoke `build`.
-5. Only if the user explicitly says "yes" or "approve" in the terminal may you invoke `build`.
+5. Only if the user explicitly says "yes" or "approve" in the terminal may you invoke `build`. Before invoking `build`, you MUST kill the Visual Companion server process if it is running.
 
 ## Strict Git Rules
 1. **Never execute mutating git commands.** Do not use `git add`, `git commit`, `git worktree`, `git stash`, `git branch`, `git merge`, or `git rebase`.

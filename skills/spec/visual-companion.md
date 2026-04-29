@@ -43,6 +43,12 @@ Save `screen_dir` and `state_dir` from the stdout JSON response. Tell user to op
    - Read `$STATE_DIR/events` if it exists — this contains the user's browser interactions (clicks, selections) as JSON lines.
    - Iterate or advance based on feedback.
 
+4. **Iterate until the user explicitly states they are satisfied.** Do NOT try to rush to the final spec approval while the user is still iterating in the visual companion. Only proceed to spec approval when the user explicitly indicates they are done with the visual design.
+
+## Ending a Session
+
+When the spec is finalized and the user approves the build, you MUST kill the visual companion server process. Do not leave it running in the background.
+
 ## Writing Content Fragments
 
 Write just the content that goes inside the page. 

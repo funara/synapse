@@ -1,0 +1,11 @@
+{
+  "name": "brainstorm-server-tests",
+  "version": "1.0.0",
+  "description": "Tests for the visual companion server",
+  "scripts": {
+    "test": "node visual-companion.test.js"
+  },
+  "dependencies": {
+    "ws": "^8.16.0"
+  }
+}
