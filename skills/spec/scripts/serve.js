@@ -170,18 +170,34 @@ const helperScript = `
 const helperInjection = '<script>\n' + helperScript + '\n</script>';
 
 // ========== Helper Functions ==========
-function extractBody(html) {
+function extractContentAndHead(html) {
+  let headContent = '';
+  const headMatch = html.match(/<head[^>]*>([\s\S]*)<\/head>/i);
+  if (headMatch) {
+    const links = headMatch[1].match(/<link[^>]*rel=["']stylesheet["'][^>]*>/gi) || [];
+    const styles = headMatch[1].match(/<style[^>]*>[\s\S]*?<\/style>/gi) || [];
+    headContent = [...links, ...styles].join('\n');
+  }
+
+  let bodyContent = html;
   const bodyMatch = html.match(/<body[^>]*>([\s\S]*)<\/body>/i);
-  if (bodyMatch) return bodyMatch[1];
+  if (bodyMatch) {
+    bodyContent = bodyMatch[1];
+  } else {
+    bodyContent = html.replace(/<!doctype html>/ig, '')
+                      .replace(/<html[^>]*>|<\/html>/ig, '')
+                      .replace(/<head[^>]*>[\s\S]*<\/head>/ig, '');
+  }
   
-  // If no body tag, strip out common full-page wrappers just in case
-  return html.replace(/<!doctype html>/i, '')
-             .replace(/<html[^>]*>|<\/html>/ig, '')
-             .replace(/<head[^>]*>[\s\S]*<\/head>/ig, '');
+  return { headContent, bodyContent };
 }
 
-function wrapInFrame(content) {
-  return frameTemplate.replace('<!-- CONTENT -->', content);
+function wrapInFrame(headContent, bodyContent) {
+  let template = frameTemplate.replace('<!-- CONTENT -->', bodyContent);
+  if (headContent) {
+    template = template.replace('</head>', headContent + '\n</head>');
+  }
+  return template;
 }
 
 function getNewestScreen() {
@@ -200,9 +216,12 @@ function handleRequest(req, res) {
   touchActivity();
   if (req.method === 'GET' && req.url === '/') {
     const screenFile = getNewestScreen();
-    let html = screenFile
-      ? wrapInFrame(extractBody(fs.readFileSync(screenFile, 'utf-8')))
-      : WAITING_PAGE;
+    let html = WAITING_PAGE;
+    if (screenFile) {
+      const rawHtml = fs.readFileSync(screenFile, 'utf-8');
+      const extracted = extractContentAndHead(rawHtml);
+      html = wrapInFrame(extracted.headContent, extracted.bodyContent);
+    }
 
     if (html.includes('</body>')) {
       html = html.replace('</body>', helperInjection + '\n</body>');
