@@ -10,6 +10,8 @@ Produces design docs, acceptance criteria, task decomposition, and file maps. Th
 
 ## Visual Companion
 A browser-based companion for showing mockups, diagrams, and visual options during spec generation.
+
+<CRITICAL_RULE>
 **MANDATORY TRIGGER:** Whenever the user requests a "redesign", "UI update", or anything involving visual layout, you **MUST** offer the Visual Companion BEFORE writing any specs. 
 
 Say EXACTLY this and WAIT for their response:
@@ -17,6 +19,7 @@ Say EXACTLY this and WAIT for their response:
 
 Do NOT skip this question. Do NOT immediately generate the spec.
 If they agree, read `skills/spec/visual-companion.md` and start the server.
+</CRITICAL_RULE>
 
 ## Interaction Rule
 The ONLY time you are allowed to invoke the `build` skill is after you have generated the final text spec and received explicit, unequivocal approval from the human in the terminal.

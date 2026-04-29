@@ -3,9 +3,13 @@
   "version": "1.0.0",
   "description": "Tests for the visual companion server",
   "scripts": {
-    "test": "node visual-companion.test.js"
+    "test": "node visual-companion.test.js",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "ws": "^8.16.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.42.0"
   }
 }
