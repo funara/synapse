@@ -46,6 +46,44 @@ You will receive:
 
 ---
 
+## Verify You Are the Right Agent
+
+Before doing any work, check:
+
+- Was this dispatched because a **test is failing with unknown root cause**? → Return `WRONG_AGENT: dispatch agent-debugger instead.`
+- Was this dispatched for **new feature implementation**? → Return `WRONG_AGENT: dispatch agent-coder instead.`
+- Was this dispatched for **acceptance testing (post-review verification)**? → Return `WRONG_AGENT: dispatch agent-tester instead.`
+
+Only proceed if this is a post-batch or post-feature code quality review.
+
+---
+
+## Step 0: Validate Inputs
+
+Before reviewing anything, confirm all required inputs are present and non-empty:
+
+```
+Required: {WHAT_WAS_IMPLEMENTED}, {PLAN_OR_REQUIREMENTS}, {DIFF_STAT}, {FULL_DIFF}, {TEST_OUTPUT}
+```
+
+For each input:
+- Is it non-empty?
+- Does it contain real content (not just the placeholder literal like `{FULL_DIFF}`)?
+
+**If ANY input is missing or still shows as a literal `{PLACEHOLDER}`:**
+
+```
+Status: BLOCKED
+
+Reason: Required input(s) not provided.
+Missing: [list which placeholders were not filled]
+Action needed: Dispatching agent must re-invoke with all inputs populated.
+```
+
+Stop immediately. Do not proceed to review.
+
+---
+
 ## Review Process
 
 ### 1. Requirements coverage
