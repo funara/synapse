@@ -42,6 +42,18 @@ You will receive:
 
 ---
 
+## Verify You Are the Right Agent
+
+Before doing any work, check:
+
+- Was this dispatched because a **test is failing during implementation** (root cause unknown)? → Return `WRONG_AGENT: dispatch agent-debugger instead.`
+- Was this dispatched for **code quality review** of a diff? → Return `WRONG_AGENT: dispatch agent-reviewer instead.`
+- Was this dispatched **before** code review is complete and Critical/Important issues are resolved? → Return `WRONG_AGENT: complete agent-reviewer pass first.`
+
+Only proceed if code review is complete and this is a final acceptance verification pass.
+
+---
+
 ## Step 1: Verify Repository State
 
 ```bash

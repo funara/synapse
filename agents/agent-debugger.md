@@ -175,7 +175,13 @@ Files changed:
 
 Diff summary:
 [git diff --stat output]
+
+Lesson Candidate: [Yes / No]
+Reason: [If Yes: one sentence on why this is non-obvious and has reuse value.
+         If No: one sentence on why it does not qualify (e.g., obvious typo, already documented, not recurring).]
 ```
+
+If Lesson Candidate is **Yes**, the orchestrating agent should dispatch `agent-admin` with operation `Distill` and the above findings as input.
 
 **On architectural blocker (3+ fixes failed):**
 

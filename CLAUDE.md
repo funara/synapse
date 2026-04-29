@@ -86,3 +86,4 @@ When modifying an existing skill's behavior, check `tests/claude-code/` for a co
 - **Self-review:** Skills use inline checklists (not subagent review loops) — faster and sufficient for most changes.
 - **Commits:** Granular, after each RED-GREEN-REFACTOR cycle. Do NOT use mutating git commands inside skills.
 - **Plans:** Stored in `docs/synapse/plans/` following the date-prefixed naming convention.
+- **Comment policy (`agent-optimizer`):** The optimizer removes ALL inline comments, block comments, and docstrings — including on public APIs. This is intentional: code must explain itself through names and structure. If you need generated API docs, set up a doc-gen tool (e.g., JSDoc, typedoc, pydoc) before using the optimizer on a public interface.
