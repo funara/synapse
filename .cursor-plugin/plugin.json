@@ -1,0 +1,25 @@
+{
+  "name": "synapse",
+  "displayName": "Synapse",
+  "description": "Core skills library: TDD, debugging, collaboration patterns, and proven techniques",
+  "version": "1.0.0",
+  "author": {
+    "name": "Adhi Rahmadian",
+    "email": "adhi.rahmadian27@gmail.com"
+  },
+  "homepage": "https://github.com/funara/synapse",
+  "repository": "https://github.com/funara/synapse",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "tdd",
+    "debugging",
+    "collaboration",
+    "best-practices",
+    "workflows"
+  ],
+  "skills": "./skills/",
+  "agents": "./agents/",
+  "commands": "./commands/",
+  "hooks": "./hooks/hooks-cursor.json"
+}
