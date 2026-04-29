@@ -29,21 +29,32 @@ Save `screen_dir` and `state_dir` from the stdout JSON response. Tell user to op
 
 ## The Loop
 
-1. **Check server is alive**, then **write HTML** to a new file in `screen_dir`.
-   - Use semantic filenames: `platform.html`, `visual-style.html`, `layout.html`
-   - **Never reuse filenames** — each screen gets a fresh file
-   - Server automatically serves the newest file
+1. **Check server is alive**, then **write an `.html` file** to `screen_dir`.
+   - **The file MUST end in `.html`** — e.g. `platform.html`, `visual-style.html`, `layout.html`.
+   - **The file MUST contain HTML markup** (tags like `<div>`, `<h2>`, `<p>`). Never write JSON, plain text, or any other format — the server only detects `.html` files.
+   - **Never reuse filenames** — each screen gets a fresh file.
+   - Server automatically serves the newest `.html` file and broadcasts a reload to the browser.
 
-2. **Tell user what to expect and end your turn:**
+2. **Immediately self-verify after writing:**
+   Confirm the file exists in `screen_dir` and has a `.html` extension before ending your turn:
+   ```bash
+   # Windows
+   dir "<screen_dir>\*.html"
+   # macOS / Linux
+   ls "<screen_dir>"/*.html
+   ```
+   If no `.html` file appears, you wrote the wrong format or path. Correct it before continuing.
+
+3. **Tell user what to expect and end your turn:**
    - Remind them of the URL.
    - Give a brief text summary of what's on screen.
    - Ask them to respond in the terminal: "Take a look and let me know what you think. Click to select an option if you'd like."
 
-3. **On your next turn** — after the user responds in the terminal:
+4. **On your next turn** — after the user responds in the terminal:
    - Read `$STATE_DIR/events` if it exists — this contains the user's browser interactions (clicks, selections) as JSON lines.
    - Iterate or advance based on feedback.
 
-4. **Iterate until the user explicitly states they are satisfied.** Do NOT try to rush to the final spec approval while the user is still iterating in the visual companion. Only proceed to spec approval when the user explicitly indicates they are done with the visual design.
+5. **Iterate until the user explicitly states they are satisfied.** Do NOT try to rush to the final spec approval while the user is still iterating in the visual companion. Only proceed to spec approval when the user explicitly indicates they are done with the visual design.
 
 ## Ending a Session
 
@@ -103,4 +114,11 @@ Write just the content that goes inside the page.
 - \`.subtitle\` — secondary text below title
 - \`.section\` — content block with bottom margin
 
-**Keep mockups simple** — focus on layout and structure, not pixel-perfect design. 
+**Keep mockups simple** — focus on layout and structure, not pixel-perfect design.
+
+## What You Never Do
+
+- Write a `.json`, `.md`, `.txt`, or any non-`.html` file to `screen_dir` — the server ignores everything that is not `.html`
+- Write design data as a JSON structure and expect the server to render it — it cannot
+- Skip the self-verify step in The Loop — if the browser still shows "Waiting for the agent", you wrote the wrong file format or path
+- End your turn after "saving a design" without confirming a `.html` file exists in `screen_dir`
