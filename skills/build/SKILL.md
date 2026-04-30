@@ -24,10 +24,11 @@ Use this table to decide which agent to dispatch. Apply the FIRST matching rule.
 | Situation | Dispatch |
 |-----------|----------|
 | Executing a task from an approved plan | `agent-coder` |
-| Code quality issues (naming, duplication, dead code, over-complexity) flagged by review | `agent-optimizer` |
+| Code review of implemented task (initial or final) | `agent-reviewer` |
+| Code quality issues flagged by review | `agent-optimizer` |
 | Test is failing AND root cause is unknown | `agent-debugger` |
 | Test is failing AND root cause is known (clear fix from plan/review) | `agent-coder` |
-| Verifying acceptance criteria after review is complete | `agent-tester` |
+| Final acceptance testing of the full feature | `agent-tester` |
 | Distilling lessons, bootstrapping memory, curating knowledge | `agent-admin` |
 
 **Never dispatch `agent-optimizer` for logic/behavior changes** — those go to `agent-coder`.
@@ -39,9 +40,11 @@ Use this table to decide which agent to dispatch. Apply the FIRST matching rule.
 
 For each task in the plan, follow this sequence:
 
-1. **Dispatch `agent-coder`** — implement the task using TDD (Red → Green → Refactor)
-2. **If coder returns COMPLETE:** dispatch `agent-optimizer` only if `agent-reviewer` later flags Important code quality issues
-3. **If coder returns BLOCKED:** see Escalation Policy below
+1. **Dispatch `agent-coder`** — Implement the task using TDD.
+2. **Dispatch `agent-reviewer`** — Trigger the `review` skill to evaluate the implementation against requirements.
+3. **Dispatch `agent-debugger` (Optional)** — If tests fail and the root cause is unknown.
+4. **Dispatch `agent-optimizer`** — Apply optimizations and fix quality issues flagged by review.
+5. **Dispatch `agent-reviewer`** — Final verification pass for the task.
 
 ---
 
