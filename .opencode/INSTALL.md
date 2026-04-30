@@ -72,10 +72,10 @@ To pin a specific version:
 ### Tool mapping
 
 When skills reference Claude Code tools:
-- `TodoWrite` â†’ `todowrite`
-- `Task` with subagents â†’ `@mention` syntax
-- `Skill` tool â†’ OpenCode's native `skill` tool
-- File operations â†’ your native tools
+- `TodoWrite` -> `todowrite`
+- `Task` with subagents -> `@mention` syntax
+- `Skill` tool -> OpenCode's native `skill` tool
+- File operations -> your native tools
 
 ## Getting Help
 
