@@ -18,11 +18,17 @@ Decide per-question, not per-session. The test: **would the user understand this
 ## Starting a Session
 
 Start the visual server in the background using your execution tools.
-Because this is an extension, you must determine the absolute path to `serve.js` (which is located in the `scripts` directory next to this file) and run it:
+Because this is an extension, you MUST find the absolute path to `serve.js`. It is located in the `scripts/` directory relative to this file. 
+DO NOT assume it is in `src/scripts/` or any other directory.
+
+To find it safely:
+1. Determine the directory of this file (`visual-companion.md`).
+2. The server script is at `scripts/serve.js` in that same directory.
 
 ```bash
-node <absolute_path_to_serve.js>
+node <absolute_path_to_scripts/serve.js>
 ```
+
 
 Save `screen_dir` and `state_dir` from the stdout JSON response. Tell user to open the URL.
 **Note:** Ensure you run it as an async background task so the server survives across your turns. 

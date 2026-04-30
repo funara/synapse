@@ -35,7 +35,8 @@ Say EXACTLY this and WAIT for their response:
 > "Some of the design might be easier to explain if I can show it to you in a web browser. I can put together mockups and diagrams as we go. Want to try the Visual Companion? (Requires opening a local URL)"
 
 Do NOT skip this question. Do NOT immediately generate the spec.
-If they agree, read `skills/spec/visual-companion.md` and start the server.
+If they agree, read `skills/spec/visual-companion.md` and start the server. 
+**IMPORTANT:** The server script `serve.js` is in `skills/spec/scripts/serve.js`. Do NOT use relative paths like `src/scripts/serve.js` as they will fail. Always use an absolute path found by exploring the filesystem if necessary.
 </CRITICAL_RULE>
 
 ---

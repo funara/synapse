@@ -54,7 +54,7 @@ Before doing any work, check:
 - Was this dispatched for **new feature implementation**? → Return `WRONG_AGENT: dispatch agent-coder instead.`
 - Was this dispatched for **acceptance testing (post-review verification)**? → Return `WRONG_AGENT: dispatch agent-tester instead.`
 
-Only proceed if this is a post-batch or post-feature code quality review.
+Only proceed if this is a per-task implementation review or a post-feature code quality review.
 
 ---
 
