@@ -83,6 +83,7 @@ When modifying an existing skill's behavior, check `tests/claude-code/` for a co
 
 - **Iron Law (TDD):** If production code exists without a failing test, delete it and start fresh.
 - **Iron Law (Debugging):** No fixes without root cause investigation. Use `debug` before proposing any fix.
+- **Iron Law (Testing):** ALWAYS auto-trigger the `test` skill immediately after making ANY modification to source code, including simple ad-hoc edits, visual changes, or backend updates. Do not ask for permission; just test.
 - **Self-review:** Skills use inline checklists (not subagent review loops) — faster and sufficient for most changes.
 - **Commits:** Granular, after each RED-GREEN-REFACTOR cycle. Do NOT use mutating git commands inside skills.
 - **Plans:** Stored in `docs/synapse/plans/` following the date-prefixed naming convention.
